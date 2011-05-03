@@ -225,13 +225,9 @@ Class PageData {
       if(!$current_page_template_file) $current_page_template_file = $page->template_file;
 
       preg_match('/\.([\w\d]+?)$/', $current_page_template_file, $split_path);
-      # set a variable with a name of 'key' on the page with a value of 'value'
-      # if the template type is xml or html & the 'value' contains a newline character, parse it as markdown
-      if(strpos($colon_split[1], "\n") !== false && preg_match('/xml|htm|html|rss|rdf|atom/', $split_path[1])) {
-        $page->$colon_split[0] = Markdown(trim($colon_split[1]));
-      } else {
-        $page->$colon_split[0] = trim($colon_split[1]);
-      }
+
+      # don't parse as Markdown
+      $page->$colon_split[0] = trim($colon_split[1]);
     }
   }
 
